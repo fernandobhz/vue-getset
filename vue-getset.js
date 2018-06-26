@@ -27,7 +27,7 @@ window.getset = {
 			
 			return ret;
 		}
-		, get: function() { console.log('get');
+		, get: function() { //console.log('get');
 			var id = this.$route.params.id;
 			var keys = this.keys();
 
@@ -39,7 +39,7 @@ window.getset = {
 				this[key] = this.element().data[id][key];
 			}
 		},
-		set: function() { console.log('set');
+		set: function() { //console.log('set');
 			var id = this.$route.params.id;
 			var keys = Object.keys(this.$data);
 
