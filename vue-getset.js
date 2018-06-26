@@ -50,3 +50,22 @@ window.getset = {
 		}
 	}
 }
+
+window.vuecomp = function(elm, data, opt) {
+	if ( ! elm.id ) 
+		throw new Error('vuecomp requires and element id');
+	
+	if ( ! data ) data = {};
+	if ( ! opt ) opt = {};
+	
+	if ( ! opt.template ) opt.template = elm.innerHTML;
+	if ( opt.mixins ) opt.mixins.push(getset);
+	else opt.mixins = [getset];
+	
+	opt.data = function() {
+		return data;
+	}
+	
+	elm.component = Vue.component(elm.id, opt);
+}
+
