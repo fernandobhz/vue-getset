@@ -1,0 +1,25 @@
+{
+  "name": "vue-getset",
+  "version": "1.0.0",
+  "description": "A getset mixin for vue",
+  "main": "vue-getset.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fernandobhz/vue-getset.git"
+  },
+  "keywords": [
+    "vue",
+    "get",
+    "set",
+    "getset"
+  ],
+  "author": "Fernando Reis Guimaraes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fernandobhz/vue-getset/issues"
+  },
+  "homepage": "https://github.com/fernandobhz/vue-getset#readme"
+}
