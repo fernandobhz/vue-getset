@@ -27,34 +27,31 @@ window.getset = {
 			
 			for ( var i = 0; i < keys.length; i++ ) {
 				var key = keys[i];
-				ret[key] = this.$data[key];
+				ret[key] = this[key];
 			}
 			
 			return ret;
 		}
 		, get: function() { //console.log('get');
-			var cname = this.$options.name;
 			var iid = this.instanceId();
 			var keys = this.keys();
 
 			if ( ! this.element().data ) this.element().data = {};
-			if ( ! this.element().data[cname] ) this.element().data[cname] = {};
-			if ( ! this.element().data[cname][iid] ) this.element().data[cname][iid] = this.data();
+			if ( ! this.element().data[iid] ) this.element().data[iid] = this.data();
 
 			for ( var i = 0; i < keys.length; i++ ) {
 				var key = keys[i];
-				this[key] = this.element().data[cname][iid][key];
+				this[key] = this.element().data[iid][key];
 			}
 		},
 		set: function() { //console.log('set');
-			var cname = this.$options.name;
 			var iid = this.instanceId();
 			
 			var keys = Object.keys(this.$data);
 
 			for ( var i = 0; i < keys.length; i++ ) {
 				var key = keys[i];
-				this.element().data[cname][iid][key] = this[key];
+				this.element().data[iid][key] = this[key];
 			}
 		}
 	}
