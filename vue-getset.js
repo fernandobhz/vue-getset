@@ -1,8 +1,8 @@
 window.getset = {
 	props: ['id']
 	, watch: {
-		'$route': { handler: 'get' },
-		'$data':  { handler: 'set', deep: true }
+		'id': { handler: function(n, o) { console.log('watch id ' + o + ' > ' + n + ' $props.id: ' + this.$props.id); this.get(); }, deep: true },
+		'$data':  { handler: 'set', deep: true	 }
 	}
 	, created: function() {
 		this.get();
@@ -24,15 +24,15 @@ window.getset = {
 			var ret = {};
 			
 			var keys = this.keys();
+			var model = this.$options.model();
 			
 			for ( var i = 0; i < keys.length; i++ ) {
 				var key = keys[i];
-				ret[key] = this[key];
+				ret[key] = model[key];
 			}
-			
 			return ret;
 		}
-		, get: function() { //console.log('get');
+		, get: function() { //console.log('get'); 
 			var iid = this.instanceId();
 			var keys = this.keys();
 
@@ -68,9 +68,12 @@ window.vuecomp = function(elm, data, opt) {
 	if ( opt.mixins ) opt.mixins.push(getset);
 	else opt.mixins = [getset];
 		
-	opt.data = function() { //console.log(data);
-		return JSON.parse(JSON.stringify(data));
+	opt.data = function() {
+		var ret = JSON.parse(JSON.stringify(data));
+		return ret;
 	}
+	
+	opt.model = opt.data;
 	
 	elm.component = Vue.component(elm.id, opt);
 }
