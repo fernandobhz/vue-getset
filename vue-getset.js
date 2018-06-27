@@ -43,8 +43,8 @@ window.getset = {
 				var key = keys[i];
 				this[key] = this.element().data[iid][key];
 			}
-		},
-		set: function() { //console.log('set');
+		}
+		, set: function() { //console.log('set');
 			var iid = this.instanceId();
 			
 			var keys = Object.keys(this.$data);
@@ -77,4 +77,3 @@ window.vuecomp = function(elm, data, opt) {
 	
 	elm.component = Vue.component(elm.id, opt);
 }
-
