@@ -8,7 +8,12 @@ window.getset = {
 		this.get();
 	}
 	, methods: {
-		element: function() {
+		instanceId: function() {
+			var id = this.$props.id;
+			if ( ! id ) id = "uniqueInstance";
+			return id;
+		}
+		, element: function() {
 			var selector = "#" + this.$options.name;
 			return document.querySelector(selector);
 		}
@@ -28,24 +33,28 @@ window.getset = {
 			return ret;
 		}
 		, get: function() { //console.log('get');
-			var id = this.$route.params.id;
+			var cname = this.$options.name;
+			var iid = this.instanceId();
 			var keys = this.keys();
 
 			if ( ! this.element().data ) this.element().data = {};
-			if ( ! this.element().data[id] ) this.element().data[id] = this.data();
+			if ( ! this.element().data[cname] ) this.element().data[cname] = {};
+			if ( ! this.element().data[cname][iid] ) this.element().data[cname][iid] = this.data();
 
 			for ( var i = 0; i < keys.length; i++ ) {
 				var key = keys[i];
-				this[key] = this.element().data[id][key];
+				this[key] = this.element().data[cname][iid][key];
 			}
 		},
 		set: function() { //console.log('set');
-			var id = this.$route.params.id;
+			var cname = this.$options.name;
+			var iid = this.instanceId();
+			
 			var keys = Object.keys(this.$data);
 
 			for ( var i = 0; i < keys.length; i++ ) {
 				var key = keys[i];
-				this.element().data[id][key] = this[key];
+				this.element().data[cname][iid][key] = this[key];
 			}
 		}
 	}
@@ -61,9 +70,10 @@ window.vuecomp = function(elm, data, opt) {
 	if ( ! opt.template ) opt.template = elm.innerHTML;
 	if ( opt.mixins ) opt.mixins.push(getset);
 	else opt.mixins = [getset];
-	
+		
 	opt.data = function() {
-		return data;
+		console.log(data);
+		return JSON.parse(JSON.stringify(data));
 	}
 	
 	elm.component = Vue.component(elm.id, opt);
