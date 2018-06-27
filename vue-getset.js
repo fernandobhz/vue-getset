@@ -71,8 +71,7 @@ window.vuecomp = function(elm, data, opt) {
 	if ( opt.mixins ) opt.mixins.push(getset);
 	else opt.mixins = [getset];
 		
-	opt.data = function() {
-		console.log(data);
+	opt.data = function() { //console.log(data);
 		return JSON.parse(JSON.stringify(data));
 	}
 	
