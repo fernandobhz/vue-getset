@@ -14,17 +14,31 @@
 		<hr>
 		<router-link to="/foo/a">Go to Foo-A</router-link>
 		<router-link to="/foo/b">Go to Foo-B</router-link>
-		<router-link to="/bar">Go to Bar</router-link>
+		<router-link to="/bar/a">Go to Bar-A</router-link>
+		<router-link to="/bar/b">Go to Bar-B</router-link>
 		
 		<hr>Router view:<br>
 		<router-view></router-view>
 		
-		
-		<hr>V-IF: <br>
+		<hr>V-IF (getset): <br>
 		<view-foo id="if-foo-a"    v-if="$route.path.startsWith('/foo/a')"></view-foo>
 		<view-foo id="if-foo-b"    v-if="$route.path.startsWith('/foo/b')"></view-foo>
-		<view-bar id="if-bar"      v-if="$route.path == '/bar'"></view-bar>
 		
+		<hr>V-IF <br>
+		<view-bar v-if="$route.path.startsWith('/bar/a')"></view-bar>
+		<view-bar v-if="$route.path.startsWith('/bar/b')"></view-bar>
+		
+		<hr>V-IF (key): <br>
+		<view-bar id="if-bar-a"  key="if-bar-a"  v-if="$route.path.startsWith('/bar/a')"></view-bar>
+		<view-bar id="if-bar-b"  key="if-bar-b"  v-if="$route.path.startsWith('/bar/b')"></view-bar>
+		
+		<hr>V-SHOW: <br>
+		<view-bar id="if-bar-a" v-show="$route.path.startsWith('/bar/a')"></view-bar>
+		<view-bar id="if-bar-b" v-show="$route.path.startsWith('/bar/b')"></view-bar>
+		
+		<hr>V-SHOW (key): <br>
+		<view-bar id="if-bar-a" key="if-bar-show-a"  v-show="$route.path.startsWith('/bar/a')"></view-bar>
+		<view-bar id="if-bar-b" key="if-bar-show-b"  v-show="$route.path.startsWith('/bar/b')"></view-bar>
 	</div>
 </div>
 
@@ -41,7 +55,7 @@
 </template>
 
 <script>
-vuecomp(viewFoo, { texto: 'inicial-foo' } );
+vuegetset(viewFoo, { texto: 'inicial-foo' } );
 vuecomp(viewBar, { texto: 'inicial-bar' } );
 
 app = new Vue({
