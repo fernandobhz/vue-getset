@@ -1,7 +1,7 @@
 window.getset = {
 	props: ['id']
 	, watch: {
-		'id': { handler: function(n, o) { console.log('watch id ' + o + ' > ' + n + ' $props.id: ' + this.$props.id); this.get(); }, deep: true },
+		'id': { handler: 'get', deep: true },
 		'$data':  { handler: 'set', deep: true	 }
 	}
 	, created: function() {
@@ -58,7 +58,7 @@ window.getset = {
 }
 
 window.vuecomp = function(elm, data, opt) {
-	if ( ! elm.id ) 
+	if ( ! elm.id )
 		throw new Error('vuecomp requires and element id');
 	
 	if ( ! data ) data = {};

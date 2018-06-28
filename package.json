@@ -1,6 +1,6 @@
 {
   "name": "vue-getset",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "description": "A getset mixin for vue",
   "main": "vue-getset.js",
   "scripts": {
